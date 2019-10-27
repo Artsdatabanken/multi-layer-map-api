@@ -1,0 +1,64 @@
+{
+  "name": "multi-layer-map-api",
+  "description": "Merge multiple map layers into single raster.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.6",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.8",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1"
+  },
+  "scripts": {
+    "start": "node index.js --port 8000 data/",
+    "debug": "nodemon -r esm --inspect-brk --inspect=0.0.0.0:9229 index.js --port 8000",
+    "commit": "npx git-cz",
+    "report-coverage": "coveralls < coverage/lcov.info"
+  },
+  "dependencies": {
+    "better-sqlite3": "^5.4.3",
+    "canvas": "^2.6.0",
+    "express": "^4.17.1",
+    "jimp": "^0.8.4",
+    "log-less-fancy": "^1.4.0",
+    "minimist": "^1.2.0",
+    "node-fetch": "^2.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Artsdatabanken/multi-layer-map-api.git"
+  },
+  "keywords": [
+    "mbtiles",
+    "raster-tiles",
+    "vector-tiles"
+  ],
+  "author": "Bjorn Reppen <bjreppen@gmail.com> (https://github.com/bjornreppen)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Artsdatabanken/multi-layer-map-api/issues"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ]
+  },
+  "homepage": "https://github.com/Artsdatabanken/multi-layer-map-api#readme"
+}
