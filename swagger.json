@@ -16,7 +16,7 @@
   "basePath": "/",
   "schemes": ["https"],
   "paths": {
-    "/z/x/y": {
+    "/{z}/{x}/{y}": {
       "get": {
         "summary": "Builds composite maps containing up to 4 layers in each of the RGBA channels of the image",
         "description": "Multiple status values can be provided with comma separated strings",
@@ -24,9 +24,30 @@
         "produces": ["image/png"],
         "parameters": [
           {
+            "name": "z",
+            "in": "path",
+            "description": "zoom level (0...21)",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "tile row",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "tile column",
+            "required": true,
+            "type": "number"
+          },
+          {
             "name": "layers",
             "in": "query",
-            "description": "Layer paths to include in the map, example 'Natur_i_Norge/Natursystem/Beskrivelsessystem/Terrengformvariabler/Terrenghelning'",
+            "description": "Layer paths to include in the map. Go to https://data.artsdatabanken.no or https://nin.artsdatabanken.no - navigate to a layer, copy the path. Example: Natur_i_Norge/Natursystem/Beskrivelsessystem/Terrengformvariabler/Terrenghelning",
             "required": true,
             "type": "array",
             "items": {
