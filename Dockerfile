@@ -13,4 +13,5 @@ ADD . .
 RUN groupadd --gid 1007 dockerrunner && \
 	useradd -r --uid 1007 -g dockerrunner dockerrunner
 RUN chown -R :dockerrunner /app
+RUN chmod g-w /app
 CMD [ "node", "index.js", "--port", "8000", "/data/" ]
