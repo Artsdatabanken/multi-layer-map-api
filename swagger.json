@@ -1,0 +1,53 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "multi-layer-map-api merges multiple map layers into single raster for client side visualization.\n[https://multimaps.artsdatabanken.no/](https://multimaps.test.artsdatabanken.no/) or on \n[https://artsdatabanken.slack.com/, #åpnedata](https://artsdatabanken.slack.com/).\n",
+    "version": "1.0.0",
+    "title": "Multi-layer map API",
+    "contact": {
+      "email": "bjorn.reppen@artsdatabanken.no"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "multimaps.artsdatabanken.no",
+  "basePath": "/",
+  "schemes": ["https"],
+  "paths": {
+    "/z/x/y": {
+      "get": {
+        "summary": "Builds composite maps containing up to 4 layers in each of the RGBA channels of the image",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "getTile",
+        "produces": ["image/png"],
+        "parameters": [
+          {
+            "name": "layers",
+            "in": "query",
+            "description": "Layer paths to include in the map, example 'Natur_i_Norge/Natursystem/Beskrivelsessystem/Terrengformvariabler/Terrenghelning'",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about multi-layer-map-api",
+    "url": "https://github.com/Artsdatabanken/multi-layer-map-api"
+  }
+}

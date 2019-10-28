@@ -1,7 +1,6 @@
 const stack = require("./stack");
 
-async function get(path, query, config) {
-  const coords = decodePath(path);
+async function get(coords, query, config) {
   if (!query.layers)
     throw new Error('Query argument "layers" must be specified.');
   const layers = query.layers.split(",");

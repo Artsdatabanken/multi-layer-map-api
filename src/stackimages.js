@@ -29,7 +29,7 @@ function compose(stack, composite) {
     layer.image ? layer.image.bitmap.data : null
   );
   for (var o = 0; o < stack.width * stack.height * 4; o += 4) {
-    bitmap[o + 3] = 255;
+    bitmap[o + 3] = 255; // Default alpha to opaque - keep things visible unless 4 layers
     for (var layer = 0; layer < layers.length; layer++) {
       const src = layers[layer];
       if (src) bitmap[o + layer] = src[o];

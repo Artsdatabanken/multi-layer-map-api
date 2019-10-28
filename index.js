@@ -4,6 +4,7 @@ const minimist = require("minimist");
 const routes = require("./src/routes");
 const pjson = require("./package.json");
 const path = require("path");
+const swagger = require("./swagger");
 
 var argv = minimist(process.argv.slice(2), { alias: { p: "port" } });
 if (argv._.length !== 1) {
@@ -41,6 +42,7 @@ app.use(function(req, res, next) {
 const port = argv.port || 8000;
 
 routes(app, config);
+swagger.init(app);
 
 app.listen(port, () => {
   log.info("Server listening on port " + port);
