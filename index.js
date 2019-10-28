@@ -20,7 +20,6 @@ if (argv._.length !== 1) {
 
 const app = express();
 const config = { dataDirectory: path.resolve(argv._[0]) };
-config.json = require(path.join(config.dataDirectory, "config"));
 
 app.use(function(req, res, next) {
   res.header("X-Powered-By", "multi-layer-map-api v" + pjson.version);
