@@ -2,7 +2,9 @@ const stack = require("./stack");
 
 async function get(path, query, config) {
   const coords = decodePath(path);
-  const layers = (query.layers || "").split(",");
+  if (!query.layers)
+    throw new Error('Query argument "layers" must be specified.');
+  const layers = query.layers.split(",");
   const tile = await stack(config, layers, coords);
   if (!tile) return null;
   tile.contentType = "image/png";
