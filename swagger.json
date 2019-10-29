@@ -53,7 +53,8 @@
             "required": true,
             "default": [
               "Natur_i_Norge/Landskap/Landskapsgradient/Arealbruksintensitet",
-              "Natur_i_Norge/Landskap/Landskapsgradient/Kystavstand,Natur_i_Norge/Landskap/Landskapsgradient/Brepreg"
+              "Natur_i_Norge/Landskap/Landskapsgradient/Kystavstand",
+              "Natur_i_Norge/Landskap/Landskapsgradient/Brepreg"
             ],
             "minItems": 1,
             "maxItems": 4,
