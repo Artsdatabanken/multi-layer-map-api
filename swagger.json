@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "multi-layer-map-api merges multiple map layers into single raster for client side visualization.\n[https://multimaps.artsdatabanken.no/](https://multimaps.test.artsdatabanken.no/) or on \n[https://artsdatabanken.slack.com/, #åpnedata](https://artsdatabanken.slack.com/).\n",
+    "description": "multi-layer-map-api merges multiple map layers into single raster for client side GPU visualization.  Each of the channels in the output image (RGBA) are used to store one of the source layers.  Up to 4 layers may be combined in this fashion.  Pixel values from 0-255 indicate the probability of presence of the source layer. 128=50%,255=100%\n[https://multimaps.artsdatabanken.no/](https://multimaps.test.artsdatabanken.no/) or on \n[https://artsdatabanken.slack.com/, #åpnedata](https://artsdatabanken.slack.com/).\n",
     "version": "1.0.0",
     "title": "Multi-layer map API",
     "contact": {
@@ -13,10 +13,10 @@
     }
   },
   "host": "multimaps.artsdatabanken.no",
-  "basePath": "/",
+  "basePath": "/v1",
   "schemes": ["https"],
   "paths": {
-    "/{z}/{x}/{y}": {
+    "/tile/{z}/{x}/{y}": {
       "get": {
         "summary": "Builds composite maps containing up to 4 layers in each of the RGBA channels of the image",
         "description": "Multiple status values can be provided with comma separated strings",
@@ -26,8 +26,9 @@
           {
             "name": "z",
             "in": "path",
-            "description": "zoom level (0...21)",
+            "description": "zoom level (0...21). At the outer most zoom level, 0, the entire world can be rendered in a single map tile. Each zoom level doubles in both dimensions, so a single tile is replaced by 4 tiles when zooming in.",
             "required": true,
+            "default": 7,
             "type": "number"
           },
           {
@@ -35,6 +36,7 @@
             "in": "path",
             "description": "tile row",
             "required": true,
+            "default": 66,
             "type": "number"
           },
           {
@@ -42,6 +44,7 @@
             "in": "path",
             "description": "tile column",
             "required": true,
+            "default": 36,
             "type": "number"
           },
           {
@@ -49,6 +52,12 @@
             "in": "query",
             "description": "Layer paths to include in the map. Go to https://data.artsdatabanken.no or https://nin.artsdatabanken.no - navigate to a layer, copy the path. Example: Natur_i_Norge/Natursystem/Beskrivelsessystem/Terrengformvariabler/Terrenghelning",
             "required": true,
+            "default": [
+              "Natur_i_Norge/Landskap/Landskapsgradient/Arealbruksintensitet",
+              "Natur_i_Norge/Landskap/Landskapsgradient/Kystavstand,Natur_i_Norge/Landskap/Landskapsgradient/Brepreg"
+            ],
+            "minItems": 1,
+            "maxItems": 4,
             "type": "array",
             "items": {
               "type": "string"
@@ -68,7 +77,7 @@
     }
   },
   "externalDocs": {
-    "description": "Find out more about multi-layer-map-api",
+    "description": "Find out more about multi-layer-map-api on GitHub",
     "url": "https://github.com/Artsdatabanken/multi-layer-map-api"
   }
 }

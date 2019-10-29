@@ -1,7 +1,7 @@
 const tilestacker = require("./tilestacker");
 
 module.exports = function(app, config) {
-  app.get("/:z/:x/:y", (req, res, next) => {
+  app.get("/v1/tile/:z/:x/:y", (req, res, next) => {
     tilestacker
       .get(req.params, req.query, config)
       .then(node => {
