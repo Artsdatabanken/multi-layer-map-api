@@ -10,28 +10,4 @@ async function get(coords, query, config) {
   return tile;
 }
 
-function decodePath(path) {
-  const segments = parsePath(path);
-  if (segments.length < 3) return {};
-  const coords = {
-    z: readInt(segments, 0),
-    x: readInt(segments, 1),
-    y: readInt(segments, 2)
-  };
-  return coords;
-}
-
-function readInt(segments, index) {
-  const v = parseInt(segments[index]);
-  if (isNaN(v)) throw new Error("Bad arguments: " + segments.join(","));
-  return v;
-}
-
-function parsePath(relativePath) {
-  if (!relativePath) return [];
-  const parts = relativePath.split("/");
-  while (parts.length > 0 && parts[0] == "") parts.shift();
-  return parts;
-}
-
 module.exports = { get };
