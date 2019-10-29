@@ -17,8 +17,8 @@
   "paths": {
     "/tile/{z}/{x}/{y}": {
       "get": {
-        "summary": "Builds composite maps containing up to 4 layers in each of the RGBA channels of the image",
-        "description": "Multiple status values can be provided with comma separated strings",
+        "summary": "Composite map containing one layer (up to max 4) layers in each of the RGBA channels of the image",
+        "description": "Standard XYZ tiling scheme, see: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames",
         "operationId": "getTile",
         "produces": ["image/png"],
         "parameters": [
