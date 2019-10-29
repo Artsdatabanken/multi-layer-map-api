@@ -12,7 +12,6 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "multimaps.artsdatabanken.no",
   "basePath": "/v1",
   "schemes": ["https"],
   "paths": {
