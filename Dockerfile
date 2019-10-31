@@ -10,8 +10,6 @@ WORKDIR /app
 COPY --from=dep /node_modules ./node_modules
 EXPOSE 8000
 ADD . .
-RUN groupadd --gid 1007 dockerrunner && \
-	useradd -r --uid 1007 -g dockerrunner dockerrunner
-RUN chown -R :dockerrunner /app
-RUN chmod g-w /app
+RUN groupadd -r --gid 1007 dockerrunner && useradd -r -g dockerrunner dockerrunner
+USER dockerrunner
 CMD [ "node", "index.js", "--port", "8000", "/data/" ]
