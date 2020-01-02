@@ -13,10 +13,7 @@ async function stackImages(tiles) {
     0x00000000,
     (err, compositex) => {}
   );
-  compose(
-    stack,
-    composite
-  );
+  compose(stack, composite);
   return {
     image: composite,
     buffer: await composite.getBufferAsync(Jimp.MIME_PNG)
@@ -32,7 +29,10 @@ function compose(stack, composite) {
     bitmap[o + 3] = 255; // Default alpha to opaque - keep things visible unless 4 layers
     for (var layer = 0; layer < layers.length; layer++) {
       const src = layers[layer];
-      if (src) bitmap[o + layer] = src[o];
+      if (!src) continue;
+      // Make transparent areas 255 (nodata value)
+      const srcAlpha = src[o + 3];
+      bitmap[o + layer] = srcAlpha < 255 ? 255 : src[o];
     }
   }
 }
