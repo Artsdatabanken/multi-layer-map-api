@@ -24,7 +24,7 @@ async function stackImages(tiles) {
 function getSourceValue(sourceLayer, offset) {
   if (!sourceLayer) return 255;
   const srcAlpha = sourceLayer[offset + 3];
-  return srcAlpha * sourceLayer[offset];
+  return parseInt((srcAlpha / 255.0) * sourceLayer[offset]);
   // Make transparent areas 255 (nodata value)?
   //  bitmap[o + layer] = srcAlpha < 255 ? 255 : src[o];
 }
