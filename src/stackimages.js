@@ -46,7 +46,8 @@ function compose(stack, composite) {
     stats[1][v2]++;
     stats[2][v3]++;
     stats[3][v4]++;
-    stats[4][v1 * v2 * v3 * v4]++;
+    const product = parseInt((v1 * v2 * v3 * v4) / 255 / 255 / 255);
+    stats[4][product]++;
     bitmap[o++] = v1;
     bitmap[o++] = v2;
     bitmap[o++] = v3;
