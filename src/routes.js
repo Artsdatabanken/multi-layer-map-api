@@ -9,7 +9,7 @@ module.exports = function(app, config) {
         if (!node.contentType) return next();
         res.setHeader("Content-Type", node.contentType);
         for (var i = 0; i <= 4; i++)
-          res.setHeader("Stat" + i, JSON.stringify(node.stats[i]));
+          res.setHeader("Stat" + i, node.stats[i].join(","));
         res.send(node.buffer);
       })
       .catch(err => {
