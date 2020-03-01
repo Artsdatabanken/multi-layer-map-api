@@ -20,20 +20,25 @@ async function stackImages(tiles) {
   };
 }
 
+function getSourceValue(layerIndex, offset) {
+  const src = layers[layerIndex];
+  if (!src) return 255;
+  const srcAlpha = src[offset + 3];
+  return srcAlpha * src[offset];
+  // Make transparent areas 255 (nodata value)?
+  //  bitmap[o + layer] = srcAlpha < 255 ? 255 : src[o];
+}
+
 function compose(stack, composite) {
   const bitmap = composite.bitmap.data;
   const layers = stack.images.map(layer =>
     layer.image ? layer.image.bitmap.data : null
   );
   for (var o = 0; o < stack.width * stack.height * 4; o += 4) {
-    bitmap[o + 3] = 255; // Default alpha to opaque - keep things visible unless 4 layers
-    for (var layer = 0; layer < layers.length; layer++) {
-      const src = layers[layer];
-      if (!src) continue;
-      // Make transparent areas 255 (nodata value)
-      const srcAlpha = src[o + 3];
-      bitmap[o + layer] = srcAlpha < 255 ? 255 : src[o];
-    }
+    bitmap[o + 0] = getSourceValue(layers[0], o);
+    bitmap[o + 1] = getSourceValue(layers[1], o);
+    bitmap[o + 2] = getSourceValue(layers[2], o);
+    bitmap[o + 3] = getSourceValue(layers[3], o);
   }
 }
 
