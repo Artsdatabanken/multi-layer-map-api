@@ -30,7 +30,7 @@
     "jimp": "^0.8.5",
     "log-less-fancy": "^1.4.0",
     "minimist": "^1.2.3",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "swagger-ui-express": "^4.1.2"
   },
   "husky": {
