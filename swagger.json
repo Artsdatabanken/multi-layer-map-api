@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "description": "multi-layer-map-api merges multiple map layers into single raster for client side GPU visualization.  Each of the channels in the output image (RGBA) are used to store one of the source layers.  Up to 4 layers may be combined in this fashion.  Pixel values from 0-255 indicate the probability of presence of the source layer. 128=50%,255=100%\n[https://multimaps.artsdatabanken.no/](https://multimaps.artsdatabanken.no/) or on \n[https://artsdatabanken.slack.com/, #åpnedata](https://artsdatabanken.slack.com/).\n",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "Multi-layer map API",
     "contact": {
-      "email": "bjorn.reppen@artsdatabanken.no"
+      "email": "drift@artsdatabanken.no"
     },
     "license": {
       "name": "MIT",
